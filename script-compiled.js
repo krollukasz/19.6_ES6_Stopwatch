@@ -14,6 +14,9 @@ var Stopwatch = function () {
     this.print(this.times);
   }
 
+  // Zerowanie stopera
+
+
   _createClass(Stopwatch, [{
     key: "reset",
     value: function reset() {
@@ -23,6 +26,9 @@ var Stopwatch = function () {
         miliseconds: 0
       };
     }
+
+    // Wyświetlenie stopera
+
   }, {
     key: "print",
     value: function print() {
@@ -33,6 +39,9 @@ var Stopwatch = function () {
     value: function format(times) {
       return pad0(times.minutes) + ":" + pad0(times.seconds) + ":" + pad0(Math.floor(times.miliseconds));
     }
+
+    // Uruchomienie stopera
+
   }, {
     key: "start",
     value: function start() {
@@ -45,6 +54,9 @@ var Stopwatch = function () {
         }, 10);
       }
     }
+
+    // Sprawdzenie, czy stoper jest uruchomiony
+
   }, {
     key: "step",
     value: function step() {
@@ -52,6 +64,9 @@ var Stopwatch = function () {
       this.calculate();
       this.print();
     }
+
+    // Przeliczenie czasu
+
   }, {
     key: "calculate",
     value: function calculate() {
@@ -65,6 +80,9 @@ var Stopwatch = function () {
         this.times.seconds = 0;
       }
     }
+
+    // Zatrzymanie stopera
+
   }, {
     key: "stop",
     value: function stop() {
@@ -72,31 +90,21 @@ var Stopwatch = function () {
       clearInterval(this.watch);
     }
 
-    // resetowanie czasu
+    // Resetowanie czasu
 
   }, {
-    key: "reset",
-    value: function reset() {
-      this.timer.setState({
-        minutes: 0,
-        seconds: 0,
-        miliseconds: 0
-      });
+    key: "resetTimer",
+    value: function resetTimer() {
+      this.reset();
+      this.print();
     }
-
-    // reset() {
-    //   if (this.running = false) {
-    //     this.state = {
-    //       times: 0
-    //     }
-    //   }
-    // }
-    // koniec
-
   }]);
 
   return Stopwatch;
 }();
+
+// Funkcja, odpowiadająca za tworzenie liczb dwucyfrowych
+
 
 function pad0(value) {
   var result = value.toString();
@@ -108,6 +116,7 @@ function pad0(value) {
 
 var stopwatch = new Stopwatch(document.querySelector(".stopwatch"));
 
+//Przyciski
 var startButton = document.getElementById("start");
 startButton.addEventListener("click", function () {
   return stopwatch.start();
@@ -120,5 +129,5 @@ stopButton.addEventListener("click", function () {
 
 var resetButton = document.getElementById("reset");
 resetButton.addEventListener("click", function () {
-  return stopwatch.reset();
+  return stopwatch.resetTimer();
 });
